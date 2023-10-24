@@ -1,52 +1,63 @@
 #!/usr/bin/python3
-"""Square class defination"""
+""" Class Square that defines a square by
+    Private instance attribute: size
+    Private instance attirubute: position
+    Getter and Setters
+    Instantiation with optional size
+    size must be an integer
+    Public instance method: def area(self)
+    Public instance method: def my_print(self)
+    Allow compare with other
+"""
 
 
 class Square:
-    """square body"""
-
+    """Class constructor"""
     def __init__(self, size=0):
-        """square contructor 
-        Args: size: length of a side of Square
-        """
+        if type(size) != int:
+            raise TypeError('size must be an integer')
+        if size < 0:
+            raise ValueError('size must be >= 0')
         self.__size = size
 
+    """Size getter"""
     @property
     def size(self):
-        """"The propery of size as the length 
-        of a side of Square
-        Raises:
-            TypeError: if size != int
-            ValueErrorr: if size < 0
-        """
         return self.__size
 
+    """Size setter"""
     @size.setter
     def size(self, value):
-        if not isinstance(value, int):
+        if type(value) != int:
             raise TypeError('size must be an integer')
         if value < 0:
             raise ValueError('size must be >= 0')
         self.__size = value
 
+    """returns the current square area"""
     def area(self):
-        """Get the area instance to comparators"""
-        return self.__size * self.__size
+        return self.__size ** 2
 
+    """True if self is less or equal than other"""
     def __le__(self, other):
         return self.area() <= other.area()
 
+    """True if self is less than other"""
     def __lt__(self, other):
         return self.area() < other.area()
 
+    """True if self is equal than other"""
+    def __eq__(self, other):
+        return self.area() == other.area()
+
+    """True if self is greater or equal than other"""
     def __ge__(self, other):
         return self.area() >= other.area()
 
-    def __ne__(self, other):
-        return self.area() != other.area()
-
+    """True if self is greater than other"""
     def __gt__(self, other):
         return self.area() > other.area()
 
-    def __eq__(self, other):
-        return self.area() == other.area()
+    """True if self is not equeal other"""
+    def __ne__(self, other):
+        return self.area() != other.area()
